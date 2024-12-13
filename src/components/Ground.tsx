@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RigidBody } from '@react-three/rapier';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useKeyboardControls } from '../hooks/useKeyboardControls';
 import { GROUND_CONFIG, calculateTargetRotation, interpolateRotation } from '../utils/groundUtils';
-import { useGroundTextures } from '../hooks/useGroundTextures';
+import { createGroundTextures } from '../utils/textureUtils';
 
 function Ground() {
   const [currentRotation, setCurrentRotation] = useState(0);
+  const [textures, setTextures] = useState<{ baseTexture: THREE.Texture; normalMap: THREE.Texture } | null>(null);
   const keys = useKeyboardControls();
-  const { baseTexture, normalMap } = useGroundTextures();
+
+  useEffect(() => {
+    createGroundTextures().then(loadedTextures => {
+      console.log('Textures loaded in Ground component:', loadedTextures);
+      setTextures(loadedTextures);
+    }).catch(error => {
+      console.error('Error loading textures:', error);
+    });
+  }, []);
 
   useFrame(() => {
     const targetRotation = calculateTargetRotation(keys);
@@ -18,29 +27,33 @@ function Ground() {
     setCurrentRotation(newRotation);
   });
 
+  if (!textures) {
+    return null; // Várunk amíg a textúrák betöltődnek
+  }
+
   return (
     <RigidBody type="fixed" position={[0, -2, 0]} rotation={[0, 0, currentRotation]}>
       <group>
-        {/* Top surface with checkerboard pattern */}
         <mesh receiveShadow position={[0, 0.5, 0]}>
           <boxGeometry args={[30, 0.1, 30]} />
-          <meshStandardMaterial
-            map={baseTexture}
-            normalMap={normalMap}
+          <meshPhysicalMaterial
+            map={textures.baseTexture}
+            normalMap={textures.normalMap}
             normalScale={new THREE.Vector2(0.5, 0.5)}
             color="#ffffff"
             roughness={0.7}
             metalness={0.2}
+            envMapIntensity={1}
           />
         </mesh>
 
-        {/* Main body with solid color */}
         <mesh receiveShadow position={[0, 0, 0]}>
           <boxGeometry args={[30, 0.9, 30]} />
-          <meshStandardMaterial
+          <meshPhysicalMaterial
             color="#404040"
             roughness={0.7}
             metalness={0.2}
+            envMapIntensity={1}
           />
         </mesh>
       </group>
