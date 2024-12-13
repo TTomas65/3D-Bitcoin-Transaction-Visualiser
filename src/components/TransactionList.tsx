@@ -41,7 +41,10 @@ const TransactionItem: React.FC<{ tx: Transaction; btcPrice: number | null }> = 
 const TransactionList: React.FC<TransactionListProps> = ({ transactions, btcPrice }) => {
   return (
     <div className="w-96 h-screen overflow-y-auto bg-gray-900 p-6">
-      <h2 className="text-xl font-bold mb-4">Recent Transactions</h2>
+      <h2 className="text-xl font-bold mb-2">Recent Transactions</h2>
+      <p className="text-gray-400 text-sm mb-4">
+        Total transactions shown: {transactions.length}
+      </p>
       <div className="space-y-3">
         {transactions.map((tx) => (
           <TransactionItem 

@@ -73,7 +73,7 @@ function App() {
           ] as [number, number, number]
         };
 
-        setTransactions(prev => [newTransaction, ...prev].slice(0, 100));
+        setTransactions(prev => [newTransaction, ...prev]);
         addSphere(newTransaction);
         setTotalVolume(prev => prev + newTransaction.amount);
       }

@@ -28,10 +28,10 @@ function Ground() {
             map={baseTexture}
             normalMap={normalMap}
             normalScale={new THREE.Vector2(0.1, 0.1)}
-            color="#1a1a1a"
-            metalness={0.8}
-            roughness={0.2}
-            envMapIntensity={1}
+            color="#303030"
+            metalness={0.2}
+            roughness={0.7}
+            envMapIntensity={0.8}
           />
         </mesh>
 
@@ -39,10 +39,10 @@ function Ground() {
         <mesh receiveShadow position={[0, 0, 0]}>
           <boxGeometry args={[30, 0.9, 30]} />
           <meshPhysicalMaterial
-            color="#1a1a1a"
-            metalness={0.8}
-            roughness={0.2}
-            envMapIntensity={1}
+            color="#303030"
+            metalness={0.2}
+            roughness={0.7}
+            envMapIntensity={0.8}
           />
         </mesh>
       </group>
