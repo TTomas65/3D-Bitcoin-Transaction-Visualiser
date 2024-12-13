@@ -73,8 +73,24 @@ const createCheckerboardNormalMap = (
 };
 
 export const createGroundTextures = () => {
-  const baseTexture = createCheckerboardTexture();
-  const normalMap = createCheckerboardNormalMap();
+  const textureLoader = new THREE.TextureLoader();
+  
+  const baseTexture = textureLoader.load('/Textura01.jpg');
+  const normalMap = textureLoader.load('/Textura01.jpg');
+
+  // Textúra ismétlés beállítása
+  baseTexture.wrapS = baseTexture.wrapT = THREE.RepeatWrapping;
+  normalMap.wrapS = normalMap.wrapT = THREE.RepeatWrapping;
+  
+  // Textúra ismétlések száma
+  baseTexture.repeat.set(4, 4);
+  normalMap.repeat.set(4, 4);
+
+  // Textúra minőségi beállítások
+  baseTexture.magFilter = THREE.LinearFilter;
+  baseTexture.minFilter = THREE.LinearMipmapLinearFilter;
+  normalMap.magFilter = THREE.LinearFilter;
+  normalMap.minFilter = THREE.LinearMipmapLinearFilter;
 
   return {
     baseTexture,

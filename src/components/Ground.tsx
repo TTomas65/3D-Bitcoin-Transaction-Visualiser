@@ -24,25 +24,23 @@ function Ground() {
         {/* Top surface with checkerboard pattern */}
         <mesh receiveShadow position={[0, 0.5, 0]}>
           <boxGeometry args={[30, 0.1, 30]} />
-          <meshPhysicalMaterial
+          <meshStandardMaterial
             map={baseTexture}
             normalMap={normalMap}
-            normalScale={new THREE.Vector2(0.1, 0.1)}
-            color="#303030"
-            metalness={0.2}
+            normalScale={new THREE.Vector2(0.5, 0.5)}
+            color="#ffffff"
             roughness={0.7}
-            envMapIntensity={0.8}
+            metalness={0.2}
           />
         </mesh>
 
         {/* Main body with solid color */}
         <mesh receiveShadow position={[0, 0, 0]}>
           <boxGeometry args={[30, 0.9, 30]} />
-          <meshPhysicalMaterial
-            color="#303030"
-            metalness={0.2}
+          <meshStandardMaterial
+            color="#404040"
             roughness={0.7}
-            envMapIntensity={0.8}
+            metalness={0.2}
           />
         </mesh>
       </group>
