@@ -4,17 +4,37 @@ export const GROUND_CONFIG = {
   RETURN_SPEED: 0.03, // Speed of returning to neutral position
 };
 
-export const calculateTargetRotation = (keys: { [key: string]: boolean }): number => {
-  if (keys['a']) return GROUND_CONFIG.MAX_TILT;
-  if (keys['d']) return -GROUND_CONFIG.MAX_TILT;
-  return 0;
+interface GroundRotation {
+  x: number; // Forward/Back rotation (W/S)
+  z: number; // Left/Right rotation (A/D)
+}
+
+export const calculateTargetRotation = (keys: { [key: string]: boolean }): GroundRotation => {
+  const rotation: GroundRotation = { x: 0, z: 0 };
+
+  // Left/Right tilt (A/D)
+  if (keys['a']) rotation.z = GROUND_CONFIG.MAX_TILT;
+  if (keys['d']) rotation.z = -GROUND_CONFIG.MAX_TILT;
+
+  // Forward/Back tilt (W/S)
+  if (keys['w']) rotation.x = -GROUND_CONFIG.MAX_TILT;
+  if (keys['s']) rotation.x = GROUND_CONFIG.MAX_TILT;
+
+  return rotation;
 };
 
 export const interpolateRotation = (
-  current: number,
-  target: number,
+  current: GroundRotation,
+  target: GroundRotation,
   speed: number
-): number => {
+): GroundRotation => {
+  return {
+    x: interpolateValue(current.x, target.x, speed),
+    z: interpolateValue(current.z, target.z, speed)
+  };
+};
+
+const interpolateValue = (current: number, target: number, speed: number): number => {
   const diff = target - current;
   if (Math.abs(diff) < 0.001) return target;
   return current + diff * speed;

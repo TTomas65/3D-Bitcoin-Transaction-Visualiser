@@ -6,8 +6,13 @@ import { useKeyboardControls } from '../hooks/useKeyboardControls';
 import { GROUND_CONFIG, calculateTargetRotation, interpolateRotation } from '../utils/groundUtils';
 import { createGroundTextures } from '../utils/textureUtils';
 
+interface GroundRotation {
+  x: number;
+  z: number;
+}
+
 function Ground() {
-  const [currentRotation, setCurrentRotation] = useState(0);
+  const [currentRotation, setCurrentRotation] = useState<GroundRotation>({ x: 0, z: 0 });
   const [textures, setTextures] = useState<{ baseTexture: THREE.Texture; normalMap: THREE.Texture } | null>(null);
   const keys = useKeyboardControls();
 
@@ -22,7 +27,9 @@ function Ground() {
 
   useFrame(() => {
     const targetRotation = calculateTargetRotation(keys);
-    const speed = targetRotation === 0 ? GROUND_CONFIG.RETURN_SPEED : GROUND_CONFIG.TILT_SPEED;
+    const speed = (targetRotation.x === 0 && targetRotation.z === 0) 
+      ? GROUND_CONFIG.RETURN_SPEED 
+      : GROUND_CONFIG.TILT_SPEED;
     const newRotation = interpolateRotation(currentRotation, targetRotation, speed);
     setCurrentRotation(newRotation);
   });
@@ -32,7 +39,7 @@ function Ground() {
   }
 
   return (
-    <RigidBody type="fixed" position={[0, -2, 0]} rotation={[0, 0, currentRotation]}>
+    <RigidBody type="fixed" position={[0, -2, 0]} rotation={[currentRotation.x, 0, currentRotation.z]}>
       <group>
         <mesh receiveShadow position={[0, 0.5, 0]}>
           <boxGeometry args={[30, 0.1, 30]} />

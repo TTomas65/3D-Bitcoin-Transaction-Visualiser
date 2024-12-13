@@ -39,6 +39,31 @@ const ControlsPanel: React.FC<ControlsPanelProps> = () => {
         <div className="space-y-4">
           <div className="space-y-2">
             <div className="flex items-center space-x-2 text-blue-400">
+              <Mouse className="w-4 h-4" />
+              <span className="text-sm font-semibold">Mouse Controls</span>
+            </div>
+            <div className="space-y-1 pl-6">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-gray-400">View Transaction Details</span>
+                <span className="px-2 py-1 bg-gray-800 rounded text-xs font-mono">Click on Sphere</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-gray-400">Rotate Camera</span>
+                <span className="px-2 py-1 bg-gray-800 rounded text-xs font-mono">Left Click + Drag</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-gray-400">Pan Camera</span>
+                <span className="px-2 py-1 bg-gray-800 rounded text-xs font-mono">Right Click + Drag</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-gray-400">Zoom Camera</span>
+                <span className="px-2 py-1 bg-gray-800 rounded text-xs font-mono">Mouse Wheel</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex items-center space-x-2 text-blue-400">
               <Keyboard className="w-4 h-4" />
               <span className="text-sm font-semibold">Keyboard Controls</span>
             </div>
@@ -51,26 +76,13 @@ const ControlsPanel: React.FC<ControlsPanelProps> = () => {
                 <span className="text-gray-400">Tilt Right</span>
                 <kbd className="px-2 py-1 bg-gray-800 rounded text-xs font-mono">D</kbd>
               </div>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <div className="flex items-center space-x-2 text-blue-400">
-              <Mouse className="w-4 h-4" />
-              <span className="text-sm font-semibold">Mouse Controls</span>
-            </div>
-            <div className="space-y-1 pl-6">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-400">Rotate Camera</span>
-                <span className="px-2 py-1 bg-gray-800 rounded text-xs">Left Click + Drag</span>
+                <span className="text-gray-400">Tilt Forward</span>
+                <kbd className="px-2 py-1 bg-gray-800 rounded text-xs font-mono">W</kbd>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-400">Pan Camera</span>
-                <span className="px-2 py-1 bg-gray-800 rounded text-xs">Right Click + Drag</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-400">Zoom Camera</span>
-                <span className="px-2 py-1 bg-gray-800 rounded text-xs">Mouse Wheel</span>
+                <span className="text-gray-400">Tilt Back</span>
+                <kbd className="px-2 py-1 bg-gray-800 rounded text-xs font-mono">S</kbd>
               </div>
             </div>
           </div>
