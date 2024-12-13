@@ -2,6 +2,7 @@ import React from 'react';
 import { X } from 'lucide-react';
 import { TransactionDetails } from '../types';
 import { formatTimestamp, formatBTC } from '../utils/formatters';
+import { getColorForAmount, getHSLColor } from '../utils/colorUtils';
 
 interface TransactionModalProps {
   transaction: TransactionDetails | null;
@@ -32,7 +33,10 @@ const TransactionModal: React.FC<TransactionModalProps> = ({ transaction, onClos
               title="Amount"
               value={
                 <>
-                  <div className="text-green-400 font-mono">
+                  <div 
+                    className="font-mono"
+                    style={{ color: getHSLColor(getColorForAmount(transaction.amount)) }}
+                  >
                     {formatBTC(transaction.amount)} BTC
                   </div>
                   {btcPrice && (
