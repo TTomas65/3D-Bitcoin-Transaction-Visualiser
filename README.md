@@ -2,7 +2,7 @@
 
 A real-time 3D visualization of Bitcoin transactions using React Three Fiber and WebSocket API. This project creates an immersive experience for watching Bitcoin transactions as they happen on the blockchain.
 
-
+![Running image](Images/Running_image01d.jpg)
 
 ## Features
 
