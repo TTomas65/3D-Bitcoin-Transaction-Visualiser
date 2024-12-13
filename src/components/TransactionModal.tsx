@@ -34,7 +34,7 @@ const TransactionModal: React.FC<TransactionModalProps> = ({ transaction, onClos
               value={
                 <>
                   <div 
-                    className="font-mono"
+                    className="font-mono text-xl font-bold"
                     style={{ color: getHSLColor(getColorForAmount(transaction.amount)) }}
                   >
                     {formatBTC(transaction.amount)} BTC
