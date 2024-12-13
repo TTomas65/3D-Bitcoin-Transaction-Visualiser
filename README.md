@@ -1,8 +1,8 @@
-# Bitcoin Transaction Visualizer
+# 3D Bitcoin Transaction Visualizer
 
-A real-time 3D visualization of Bitcoin transactions using React Three Fiber and WebSocket API. This project creates an immersive experience for watching Bitcoin transactions as they happen on the blockchain.
+A real-time 3D visualization tool for Bitcoin transactions using Three.js and React. This application creates an immersive experience by representing Bitcoin transactions as dynamic spheres in a 3D space.
 
-![Running image](Images/Running_imaged01.jpg)
+![Running image](Images/Running_imaged02.jpg)
 
 ## Features
 
@@ -12,6 +12,20 @@ A real-time 3D visualization of Bitcoin transactions using React Three Fiber and
 - 📊 Transaction history with detailed information
 - 🎥 3D visualization with physics simulation
 - ⚡ Built with modern React and Three.js
+
+- Real-time visualization of Bitcoin transactions
+- Dynamic 3D spheres representing transactions with:
+  - Size based on transaction amount
+  - Color coding based on transaction value
+  - Physical interactions between transaction spheres
+  - Reflective surfaces with Bitcoin logo texture
+- Interactive ground plane with:
+  - Custom concrete texture
+  - Centered Bitcoin logo overlay
+  - Dynamic tilting based on user input
+- Transaction details modal on sphere click
+- Physics-based animations using Rapier physics engine
+- Responsive 3D environment with proper lighting and shadows
 
 ## Color Coding
 
@@ -29,50 +43,92 @@ Transaction spheres are color-coded based on their BTC amount:
 
 - React
 - TypeScript
-- Three.js
-- React Three Fiber
-- React Three Rapier (Physics)
-- Tailwind CSS
-- WebSocket API
-- Vite
+- Three.js for 3D rendering
+- @react-three/fiber for React integration with Three.js
+- @react-three/rapier for physics simulation
+- WebGL for hardware-accelerated graphics
+- Vite for development and building
 
-## Getting Started
+## Installation
 
-### Prerequisites
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/3d-bitcoin-transaction-visualiser.git
+cd 3d-bitcoin-transaction-visualiser
+```
 
-- Node.js (v16 or higher)
-- npm or yarn
+2. Install dependencies:
+```bash
+npm install
+```
 
+3. Create a `.env` file in the root directory and add your Bitcoin API credentials if required:
+```env
+VITE_API_KEY=your_api_key_here
+```
 
-The application demo will be available at https://brilliant-cannoli-943c2d.netlify.app/
+4. Start the development server:
+```bash
+npm run dev
+```
 
-## Features in Detail
+5. Open your browser and navigate to:
+```
+http://localhost:5173
+```
 
-### Real-time Transaction Monitoring
-- Connects to blockchain.info WebSocket API
-- Displays new transactions as they occur
-- Shows transaction amount, timestamp, and hash
+## Usage
 
-### 3D Visualization
-- Physics-based sphere movement
-- Dynamic sphere sizing based on transaction amount
-- Color-coded transactions for easy value identification
-- Interactive camera controls
+- The application will automatically start displaying Bitcoin transactions as they occur
+- Spheres will fall onto the ground plane and interact with each other
+- Click on any sphere to view detailed transaction information
+- Use keyboard controls to interact with the ground plane:
+  - Arrow keys to tilt the ground
+  - Ground will automatically return to level position when keys are released
 
-### Information Display
-- Current Bitcoin price in USD
-- Total transaction volume
-- Active transaction count
-- Color legend for transaction values
+## Project Structure
+
+```
+src/
+├── components/          # React components
+├── hooks/              # Custom React hooks
+├── utils/              # Utility functions
+├── types/              # TypeScript type definitions
+└── assets/            # Static assets and textures
+```
+
+## Configuration
+
+The application can be configured through various configuration files:
+
+- `src/config/constants.ts` - General application constants
+- `src/utils/sphereUtils.ts` - Sphere size and physics calculations
+- `src/utils/colorUtils.ts` - Color mapping for transactions
+- `src/utils/groundUtils.ts` - Ground plane behavior and textures
+
+## Development
+
+To start development:
+
+1. Fork the repository
+2. Create a new branch for your feature
+3. Make your changes
+4. Submit a pull request
+
+## Building for Production
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+The built files will be in the `dist` directory.
 
 ## License
 
-This project is licensed under the MIT License 
-## Acknowledgments
+[MIT License](LICENSE)
 
-- [blockchain.info](https://blockchain.info/) for their WebSocket API
-- [CoinDesk](https://www.coindesk.com/) for the Bitcoin price API
-- [Three.js](https://threejs.org/) for 3D rendering capabilities
-- [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) for React integration with Three.js
+## Contributing
 
-
+Contributions are welcome! Please feel free to submit a Pull Request.
