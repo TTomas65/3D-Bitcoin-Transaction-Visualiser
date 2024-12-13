@@ -14,6 +14,7 @@ function App() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [totalVolume, setTotalVolume] = useState(0);
   const [btcPrice, setBtcPrice] = useState<number | null>(null);
+  const [highQualityRendering, setHighQualityRendering] = useState(true);
   const activeSpheres = useRef<Map<string, Transaction>>(new Map());
   const [sphereCount, setSphereCount] = useState(0);
   const { 
@@ -91,7 +92,10 @@ function App() {
           sphereCount={sphereCount}
         />
         
-        <ControlsPanel />
+        <ControlsPanel 
+          highQualityRendering={highQualityRendering}
+          onRenderingQualityChange={setHighQualityRendering}
+        />
 
         <Canvas
           camera={{ position: [0, 20, 30], fov: 75 }}
@@ -114,6 +118,7 @@ function App() {
               spheres={Array.from(activeSpheres.current.values())} 
               onRemoveSphere={removeSphere}
               onSphereClick={handleSphereClick}
+              highQualityRendering={highQualityRendering}
             />
           </Physics>
         </Canvas>

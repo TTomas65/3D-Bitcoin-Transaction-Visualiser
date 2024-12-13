@@ -8,9 +8,15 @@ interface TransactionSceneProps {
   spheres: Transaction[];
   onRemoveSphere: (hash: string) => void;
   onSphereClick: (transaction: Transaction) => void;
+  highQualityRendering: boolean;
 }
 
-function TransactionScene({ spheres, onRemoveSphere, onSphereClick }: TransactionSceneProps) {
+function TransactionScene({ 
+  spheres, 
+  onRemoveSphere, 
+  onSphereClick,
+  highQualityRendering 
+}: TransactionSceneProps) {
   return (
     <>
       <Environment preset="city" />
@@ -21,6 +27,7 @@ function TransactionScene({ spheres, onRemoveSphere, onSphereClick }: Transactio
           transaction={sphere}
           onRemove={onRemoveSphere}
           onClick={onSphereClick}
+          highQualityRendering={highQualityRendering}
         />
       ))}
     </>

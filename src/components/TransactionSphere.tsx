@@ -10,14 +10,28 @@ interface TransactionSphereProps {
   transaction: Transaction;
   onRemove: (hash: string) => void;
   onClick: (transaction: Transaction) => void;
+  highQualityRendering: boolean;
 }
+
+// Alacsony minőségű rendereléshez
+const lowQualitySphereGeom = new THREE.SphereGeometry(1, 16, 16);
+const lowQualityMaterial = new THREE.MeshStandardMaterial({
+  metalness: 0.7,
+  roughness: 0.2,
+  envMapIntensity: 0.8
+});
+
+// Magas minőségű rendereléshez
+const highQualitySphereGeom = new THREE.SphereGeometry(1, 32, 32);
 
 const TransactionSphere: React.FC<TransactionSphereProps> = ({ 
   transaction, 
   onRemove,
-  onClick 
+  onClick,
+  highQualityRendering
 }) => {
   const rigidBodyRef = useRef<RigidBodyApi>(null);
+  const materialRef = useRef<THREE.MeshStandardMaterial>();
   
   const size = calculateSphereSize(transaction.amount);
   const colorProps = getColorForAmount(transaction.amount);
@@ -27,12 +41,10 @@ const TransactionSphere: React.FC<TransactionSphereProps> = ({
     colorProps.lightness / 100
   );
 
+  // Csak akkor ellenőrizzük a pozíciót, ha a gömb aktív
   useFrame(() => {
-    if (rigidBodyRef.current) {
-      const position = rigidBodyRef.current.translation();
-      if (position.y < -10) {
-        onRemove(transaction.hash);
-      }
+    if (rigidBodyRef.current?.translation().y < -10) {
+      onRemove(transaction.hash);
     }
   });
 
@@ -48,22 +60,33 @@ const TransactionSphere: React.FC<TransactionSphereProps> = ({
       colliders="ball"
       restitution={0.7}
       friction={0.5}
+      linearDamping={0.2}
+      angularDamping={0.2}
     >
       <mesh 
         castShadow 
         receiveShadow
         onClick={handleClick}
+        geometry={highQualityRendering ? highQualitySphereGeom : lowQualitySphereGeom}
+        scale={size}
       >
-        <sphereGeometry args={[size, 32, 32]} />
-        <meshPhysicalMaterial
-          color={color}
-          metalness={0.9}
-          roughness={0.1}
-          envMapIntensity={1}
-          clearcoat={1}
-          clearcoatRoughness={0.1}
-          reflectivity={1}
-        />
+        {highQualityRendering ? (
+          <meshPhysicalMaterial
+            color={color}
+            metalness={0.9}
+            roughness={0.1}
+            envMapIntensity={1}
+            clearcoat={1}
+            clearcoatRoughness={0.1}
+            reflectivity={1}
+          />
+        ) : (
+          <meshStandardMaterial
+            ref={materialRef}
+            {...lowQualityMaterial}
+            color={color}
+          />
+        )}
       </mesh>
     </RigidBody>
   );

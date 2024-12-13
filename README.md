@@ -27,6 +27,9 @@ A real-time 3D visualization tool for Bitcoin transactions using Three.js and Re
 - Transaction details modal on sphere click
 - Physics-based animations using Rapier physics engine
 - Responsive 3D environment with proper lighting and shadows
+- Adjustable rendering quality:
+  - High Quality Mode (default): Better visuals with detailed spheres and advanced materials
+  - Low Quality Mode: Improved performance with simplified geometry and materials for handling many transactions
 
 ## Performance Optimization
 
@@ -35,6 +38,7 @@ The application is optimized to utilize your GPU's capabilities:
 - Automatically requests high-performance GPU on systems with multiple graphics cards
 - Optimized rendering settings with antialiasing and disabled unnecessary alpha channel
 - Efficient 3D scene management with Three.js
+- Switchable rendering quality in the Controls panel for better performance during high transaction volumes
 
 ## Color Coding
 
