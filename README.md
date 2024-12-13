@@ -12,6 +12,7 @@ A real-time 3D visualization tool for Bitcoin transactions using Three.js and Re
 - 📊 Transaction history with detailed information
 - 🎥 3D visualization with physics simulation
 - ⚡ Built with modern React and Three.js
+- 🚀 GPU-optimized rendering with high-performance mode for systems with multiple GPUs
 
 - Real-time visualization of Bitcoin transactions
 - Dynamic 3D spheres representing transactions with:
@@ -26,6 +27,14 @@ A real-time 3D visualization tool for Bitcoin transactions using Three.js and Re
 - Transaction details modal on sphere click
 - Physics-based animations using Rapier physics engine
 - Responsive 3D environment with proper lighting and shadows
+
+## Performance Optimization
+
+The application is optimized to utilize your GPU's capabilities:
+- Uses WebGL for hardware-accelerated graphics rendering
+- Automatically requests high-performance GPU on systems with multiple graphics cards
+- Optimized rendering settings with antialiasing and disabled unnecessary alpha channel
+- Efficient 3D scene management with Three.js
 
 ## Color Coding
 

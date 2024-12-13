@@ -97,6 +97,11 @@ function App() {
           camera={{ position: [0, 20, 30], fov: 75 }}
           className="h-screen w-full"
           shadows
+          gl={{
+            powerPreference: "high-performance",
+            antialias: true,
+            alpha: false
+          }}
         >
           <color attach="background" args={['#000000']} />
           <fog attach="fog" args={['#000000', 30, 100]} />
